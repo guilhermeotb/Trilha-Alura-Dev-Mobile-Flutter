@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'screens/dashboard.dart';
 void main() {
   runApp(BytebankApp());
-  saveContact(Contact(0, 'Maria', 123456789));
 }
 
 class BytebankApp extends StatelessWidget {
