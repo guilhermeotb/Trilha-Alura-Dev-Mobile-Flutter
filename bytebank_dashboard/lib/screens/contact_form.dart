@@ -1,8 +1,9 @@
 import 'package:bytebank_dashboard/models/contact.dart';
 import 'package:flutter/material.dart';
 
-class ContactForm extends StatefulWidget {
+import '../database/dao/contact_dao.dart';
 
+class ContactForm extends StatefulWidget {
   const ContactForm({super.key});
 
   @override
@@ -12,14 +13,13 @@ class ContactForm extends StatefulWidget {
 class _ContactFormState extends State<ContactForm> {
   final TextEditingController _nameController = TextEditingController();
 
-  final TextEditingController _accountNumberControllerr = TextEditingController();
-
+  final TextEditingController _accountNumberControllerr =
+      TextEditingController();
+final ContactDao _dao = ContactDao();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('New Contact'),
-      ),
+      appBar: AppBar(title: Text('New Contact')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -52,19 +52,21 @@ class _ContactFormState extends State<ContactForm> {
               child: SizedBox(
                 width: double.maxFinite,
                 child: ElevatedButton(
-                  
                   onPressed: () {
                     final String name = _nameController.text;
-                    final int? accountNumber = int.tryParse(_accountNumberControllerr.text);
+                    final int? accountNumber = int.tryParse(
+                      _accountNumberControllerr.text,
+                    );
                     final Contact newContact = Contact(0, name, accountNumber!);
-                    Navigator.pop(context, newContact);
+                    _dao.saveContact(
+                      newContact,
+                    ).then((id) => Navigator.pop(context));
                   },
                   child: Text('Create'),
                 ),
               ),
-            )
+            ),
           ],
-          
         ),
       ),
     );

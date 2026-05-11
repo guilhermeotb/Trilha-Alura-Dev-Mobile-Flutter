@@ -1,10 +1,19 @@
-import 'package:bytebank_dashboard/database/app_database.dart';
 import 'package:bytebank_dashboard/models/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:bytebank_dashboard/screens/contact_form.dart';
 
-class ContactsList extends StatelessWidget {
-  final List<Contact> contacts = [];
+import '../database/dao/contact_dao.dart';
+
+class ContactsList extends StatefulWidget {
+  @override
+  State<ContactsList> createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList> {
+  final ContactDao _dao = ContactDao();
+  void _refresh() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +24,7 @@ class ContactsList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: [],
-        future: findAll(),
+        future: _dao.findAll(),
         builder: (context, snapshot){
           switch(snapshot.connectionState){
             
@@ -43,7 +52,6 @@ class ContactsList extends StatelessWidget {
           },
           itemCount: contacts.length,
           );  
-          break;
           }     
           return Text("Unknown error");
         },
@@ -51,7 +59,9 @@ class ContactsList extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ContactForm(),));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => ContactForm()))
+              .then((_) => _refresh());
         },
         child: Icon(Icons.add),
       ),

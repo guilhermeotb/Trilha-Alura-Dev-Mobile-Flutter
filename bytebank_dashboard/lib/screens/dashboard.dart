@@ -7,11 +7,15 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Dashboard'), backgroundColor: Theme.of(context).primaryColor, foregroundColor: Colors.white,),
+      appBar: AppBar(
+        title: Text('Dashboard'),
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:<Widget>[
+        children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset('images/bytebank_logo.png'),
@@ -21,28 +25,33 @@ class Dashboard extends StatelessWidget {
             child: Material(
               color: Theme.of(context).primaryColor,
               child: InkWell(
-                onTap:(){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ContactsList(),));
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ContactsList()),
+                  );
                 },
                 child: Container(
                   padding: const EdgeInsets.all(8.0),
                   height: 100,
                   width: 150,
-                  
+
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Icon(Icons.people, color: Colors.white,size:32),
-                      Text('Clientes', style: TextStyle(color: Colors.white, fontSize: 16.0),),
+                      Icon(Icons.people, color: Colors.white, size: 32),
+                      Text(
+                        'Clientes',
+                        style: TextStyle(color: Colors.white, fontSize: 16.0),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-          )
-        ]
+          ),
+        ],
       ),
-      );
+    );
   }
 }
