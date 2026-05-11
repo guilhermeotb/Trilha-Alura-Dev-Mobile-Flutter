@@ -1,7 +1,12 @@
+import 'package:bytebank_dashboard/database/app_database.dart';
+import 'package:bytebank_dashboard/models/contact.dart';
 import 'package:bytebank_dashboard/screens/contact_form.dart';
 import 'package:flutter/material.dart';
 import 'screens/dashboard.dart';
-void main()  => runApp(BytebankApp());
+void main() {
+  runApp(BytebankApp());
+  saveContact(Contact(0, 'Maria', 123456789));
+}
 
 class BytebankApp extends StatelessWidget {
   const BytebankApp({super.key});
